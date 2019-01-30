@@ -38,6 +38,10 @@ const TrailSchema = new Schema({
     type: String,
     required: true
   },
+  tags: {
+    type: [String],
+    required: true
+  },
   general_area: {
     type: String,
     required: true

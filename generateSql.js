@@ -18,7 +18,7 @@ const loremIpsum = require('lorem-ipsum');
 //   Hawaii",
 //   "https://www.alltrails.com/trail/us/hawaii/wiliwilinui-ridge-trail");
 
-const sentences = function (num, words, len) {
+const sentences = function(num, words, len) {
   let sent = loremIpsum({
     count: num,
     units: 'sentences',
@@ -29,7 +29,7 @@ const sentences = function (num, words, len) {
   return sent.substring(0, len);
 };
 
-const words = function (num) {
+const words = function(num) {
   return loremIpsum({
     count: num,
     units: 'words',
@@ -37,11 +37,11 @@ const words = function (num) {
   });
 };
 
-const setNumber = function (max) {
+const setNumber = function(max) {
   return Math.floor(Math.random() * Math.floor(max));
 };
 
-const setOrigin = function () {
+const setOrigin = function() {
   let domain = loremIpsum({
     count: 1,
     units: 'words',
@@ -61,31 +61,60 @@ const setOrigin = function () {
   return results.substring(0, 99);
 };
 
-const setRouteType = function () {
+const setRouteType = function() {
   let types = ['Out & Back', 'Loop', 'Bernie'];
   let indx = Math.floor(Math.random() * Math.floor(3));
   return types[indx];
 };
 
-const setTrailName = function () {
-  let types = ["Golden Gate Park Trail", "Crescent Creek Trail", 'Hope Point', 'Lost Lake Trail', 'Ressurection Pass Trail', "Alamere Falls via Coast Trail from Palomarin Trailhead",
-  "Coast Camp/Laguna Loop", "Presidio Bay Area Ridge Trail", "Presidio Ecology Trail", "BeltLine Eastside Trail From Piedmont Park", "Bull Sluice Lake",
-  "Cascade Springs Nature Preserve Outer Loop","Chastain Park Trail","Grant Park Loop Trail","Canyon Trail to Waipoo Falls","Kaiwa Ridge (Pillbox) Trail",
-  "Makapu'u Point Lighthouse Trail (Kaiwi)","Na Pali Coast (Kalalau) Trail","Wiliwilinui Bernie Ridge Trail"];
+const setTrailName = function() {
+  let types = [
+    'Golden Gate Park Trail',
+    'Crescent Creek Trail',
+    'Hope Point',
+    'Lost Lake Trail',
+    'Ressurection Pass Trail',
+    'Alamere Falls via Coast Trail from Palomarin Trailhead',
+    'Coast Camp/Laguna Loop',
+    'Presidio Bay Area Ridge Trail',
+    'Presidio Ecology Trail',
+    'BeltLine Eastside Trail From Piedmont Park',
+    'Bull Sluice Lake',
+    'Cascade Springs Nature Preserve Outer Loop',
+    'Chastain Park Trail',
+    'Grant Park Loop Trail',
+    'Canyon Trail to Waipoo Falls',
+    'Kaiwa Ridge (Pillbox) Trail',
+    "Makapu'u Point Lighthouse Trail (Kaiwi)",
+    'Na Pali Coast (Kalalau) Trail',
+    'Wiliwilinui Bernie Ridge Trail'
+  ];
   let indx = Math.floor(Math.random() * Math.floor(3));
   return types[indx];
 };
 
-const setDifficulty = function () {
+const setDifficulty = function() {
   let howHard = ['Easy', 'Moderate', 'BernieBuster'];
   let i = Math.floor(Math.random() * Math.floor(3));
   return howHard[i];
 };
 
-const trailStrings = function () {
+const trailStrings = function() {
   let inserts = '';
   for (let i = 21; i < 101; i++) {
-    let insertStr = `INSERT INTO trail (trail_id, trail_name, distance, distance_units, elevation_gain, elevation_units, description, route_type, difficulty, general_area, origin) VALUES (${i}, "${sentences(1, 4, 70)}", ${setNumber(16)}, "miles", "${setNumber(1900)}", "ft", "${sentences(3, 5, 200)}", "${setRouteType()}", "${setDifficulty()}", "${sentences(1, 3, 65)}", "${setOrigin()}");\n`;
+    let insertStr = `INSERT INTO trail (trail_id, trail_name, distance, distance_units, elevation_gain, elevation_units, description, route_type, difficulty, general_area, origin) VALUES (${i}, "${sentences(
+      1,
+      4,
+      70
+    )}", ${setNumber(16)}, "miles", "${setNumber(1900)}", "ft", "${sentences(
+      3,
+      5,
+      200
+    )}", "${setRouteType()}", "${setDifficulty()}", "${sentences(
+      1,
+      3,
+      65
+    )}", "${setOrigin()}");\n`;
     inserts += insertStr;
   }
   return inserts;
@@ -93,8 +122,7 @@ const trailStrings = function () {
 
 // INSERT INTO trail_tags (trail_id, tag_id) VALUES (21, 8);
 
-
-const trailTags = function () {
+const trailTags = function() {
   let str = '';
   for (let i = 21; i <= 100; i++) {
     for (let j = 1; j < 11; j++) {
@@ -105,6 +133,50 @@ const trailTags = function () {
   return str;
 };
 
+const tags = () => {
+  const trailTags = [
+    'dogs on leash',
+    'hiking',
+    'mountain biking',
+    'trail walking',
+    'views',
+    'wildlife',
+    'muddy',
+    'dog friendly',
+    'backpacking',
+    'birding',
+    'camping',
+    'nature trips',
+    'paddle sports',
+    'beach',
+    'cave',
+    'forest',
+    'river',
+    'waterfall',
+    'bugs',
+    'historic site',
+    'wildlife',
+    'rocky',
+    'kid friendly',
+    'no shade',
+    'wheelchair friendly',
+    'wild flowers',
+    'lake',
+    'paved',
+    'road biking'
+  ];
+
+  let arr = [];
+  let numOfTags = Math.floor(Math.random() * 8) + 5;
+
+  for (let i = 0; i < numOfTags; i++) {
+    let num = Math.floor(Math.random() * 20);
+    console.log(num);
+    arr.push(trailTags[num]);
+  }
+
+  return arr;
+};
 
 module.exports = {
   trailStrings,
@@ -115,5 +187,6 @@ module.exports = {
   setNumber,
   words,
   sentences,
-  setTrailName
-}
+  setTrailName,
+  tags
+};
