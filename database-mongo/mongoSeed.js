@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Trail = require('./TrailModel');
 const seedFuncs = require('../generateSql.js');
 
+
+
 mongoose.connect('mongodb://localhost/trailsService')
 .then(() => {
   console.log('DATABASE CONNECTED!!!!')
@@ -46,7 +48,7 @@ Trail.deleteMany({}, (err) => {
 
   const batchSaver = () => {
     return new Promise ((resolve, reject) => {
-      Photo.insertMany(photosBatch, (err, docs) => {
+      Trail.insertMany(trailsBatch, (err, docs) => {
         if (err) {
           reject('error occured in inserting to db: ', err);
         } else {
@@ -57,10 +59,10 @@ Trail.deleteMany({}, (err) => {
   };
 
 
-  let records = 1000000;
+  let records = 10000000;
 
   const createRecords = async () => {
-
+  let start = new Date();
   for (i = records; i > 0; i--) {
     createTrail(i);
     if (trailsBatch.length === batchLimit) {
@@ -69,7 +71,9 @@ Trail.deleteMany({}, (err) => {
 
     }
   }
-  console.log(`Completed saving ${records} primary records to DB`);
+  let end = new Date();
+  let seconds = (end.getTime() - start.getTime()) / 1000;
+  console.log(`Completed saving ${records} primary records to DB in ${seconds} seconds`);
 };
   createRecords();
 

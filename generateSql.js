@@ -171,7 +171,6 @@ const tags = () => {
 
   for (let i = 0; i < numOfTags; i++) {
     let num = Math.floor(Math.random() * 20);
-    console.log(num);
     arr.push(trailTags[num]);
   }
 

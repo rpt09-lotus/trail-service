@@ -53,4 +53,4 @@ const TrailSchema = new Schema({
 });
 //
 
-module.exports = Photo = mongoose.model('Photo', PhotoSchema);
+module.exports = Trail = mongoose.model('Trail', TrailSchema);
