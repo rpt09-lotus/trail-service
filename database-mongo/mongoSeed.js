@@ -12,8 +12,7 @@ mongoose.connect('mongodb://localhost/trailsService')
   console.log('!!WE HAVE AN ERROR: ', err)
 });
 
-const trailTags = ['dogs on leash','hiking','mountain biking','trail walking','views','wildlife','muddy','dog friendly','backpacking','birding','camping','nature trips','paddle sports',
-'beach','cave','forest','river','waterfall','bugs','historic site','wildlife','rocky','kid friendly','no shade','wheelchair friendly','wild flowers','lake','paved','road biking'];
+
 
 let tagArray = []
 
@@ -90,7 +89,6 @@ Trail.deleteMany({}, (err) => {
 
 
 
-  // Batch saver
 
 
 
