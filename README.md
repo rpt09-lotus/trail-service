@@ -7,6 +7,9 @@
 + [Phase 1: Scale the Database](#Phase-1:-Scale-the-Database)
 + [Backlog / Noted Opportunities](#Backlog-/-Noted-Opportunities)
 + [Phase 2: Implement and Scale Secondary Database](#Phase-2:-Implement-and-Scale-Secondary-Database)
++ [Phase 3: Optimize Primary and Secondary Databases. Build CRUD Operation](#Phase-3:-Optimize-Primary-and-Secondary-Databases.-Build-CRUD-Operation)
++ [API Endpoints](API-Endpoints)
++ [JSON Example](JSON Example)
 
 ## Related Projects
 - [Trails (FEC)](https://github.com/rpt09-scully/trail-service)
@@ -137,61 +140,42 @@ Draft Model for Trails:
   },
 }
 ```
+##Phase 3: Optimize Primary and Secondary Databases. Build CRUD Operation
 
-#### Data Import
 
-- "The [mongoimport](https://docs.mongodb.com/manual/reference/program/mongoimport/index.html#bin.mongoimport) tool imports content from Extended JSON, CSV, or TSV."[4]
-- mongoimport only supports data files that are UTF-8 encoded.
+####API Enpoints
 
-Hmmmm. If I use `.csv` or `.tsv` as the output of my generation script, and the import source for my DB, how would I represent an array in one of the "columns" in the file for `activities`?
++ DELETE `/:trailId/delete`
+  - Given a trailId, deletes the trail information.
++ GET `/:trailId/trailInfo`
+  - Given a trailId, retrieves all trail information for that trail.
 
-Could `activity0,activity1,activity2,activity3activity4...` be imported as an array?
+Example JSON response to `http:localhost:3001/6784641/trailInfo` for a trail with an ID of 6784641:
 
-test mongoexport writing csv:
+```json
+{
+  "data": {
+    "attributes": {
+      "trail_name": "Golden Gate Park Trail",
+      "distance": 73,
+      "distance_units": "miles",
+      "elevation_gain": 1732,
+      "elevation_units": "ft",
+      "description": "Magna deserunt ea proident laborum. Laboris veniam. Nisi aliquip sint magna.",
+      "route_type": "Loop",
+      "difficulty": "BernieBuster",
+      "general_area": "Ea adipisicing",
+      "origin": "http://www.labore.com/cupidatat/aliqua.html",
+      "tags": []
+    },
+    "id": "6784641",
+    "type": "trail"
+  }
+}
 
-Add test document[5]:
-
-```sh
-db.newcol.insert({
-... id:'123',
-... name:'thename',
-... activities: ['one','two','three','four']
-... })
 ```
 
-Export:
-
-```sh
-mongoexport -d test -c newcol --fields id,name,activities --type csv > out.csv
-```
-
-Result:
-
-```sh
-───────┬─────────────────────────────────────────────────────
-       │ File: out.csv
-───────┼─────────────────────────────────────────────────────
-   1   │ id,name,activities
-   2   │ 123,thename,"[""one"",""two"",""three"",""four""]"
-───────┴─────────────────────────────────────────────────────
-```
-
-So, apparently when the output file format of `mongoexport` is csv, arrays like the profile-service activities are written with quotes in a stringified manner (like above), but are _not_ imported as array types by `mongoimport`, even though the documentation suggests otherwise. Confusing.
-
-Have to re-write my data generation script to produce JSON instead of csv to support appropriate column types. Note that the [`--columnsHaveTypes`](https://docs.mongodb.com/manual/reference/program/mongoimport/index.html#cmdoption-mongoimport-columnshavetypes) `mongoimport` option does not include any options for the `array` type. Sad panda.
-
-**Refactoring**
-
-I refactored `seed-data.js` to produce valid json for import to MongoDB. Initially, writing to a json file with 1MM records using a simple loop and array to store all records before writing, took 29.171 seconds with `--max-old-space-size=4096`, laptop crashed without that option.
-
-Then I tested writing directly to MongoDB instead of a file. I figured if we're working with json, might as well try inserting it directly, instead of the interim step of a file.
-
-I tested several variations of generating data documents and writing to the db. What seemed to worked best was a batch size of 50,000, repeated 200 times. This didn't stress my laptop, didn't require and additional memory flags, and completed the generation of the data and db insertion in 1188.63 seconds, or about 20 minutes.
-
-I [confirmed this](https://gist.github.com/ryanbrennan12/28d3688ac27d1f273e3103851dcd6d55) with `SELECT COUNT(*) FROM trail;`  and `SELECT trail_name FROM trail WHERE trail_id= 666444; `from MySql.
-
----
-
+-
 [1]: https://docs.mongodb.com/manual/core/data-modeling-introduction/
 [2]: https://docs.mongodb.com/manual/core/data-model-design/#data-modeling-embedding
 [3]: https://docs.mongodb.com/manual/core/data-model-design/#normalized-data-models

@@ -12,6 +12,15 @@ if (process.env.RDS_HOSTNAME) {
   var dbport = null;
 }
 
+var deleteTrail = (id, callback) => {
+  knex('trail')
+  .where('trail_id', {id})
+  .del()
+  .then((info) => {
+    callback(info)
+  })
+}
+
 var knex = require('knex')({
   client: 'mysql',
   connection: {
