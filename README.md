@@ -140,10 +140,10 @@ Draft Model for Trails:
   },
 }
 ```
-##Phase 3: Optimize Primary and Secondary Databases. Build CRUD Operation
+## Phase 3: Optimize Primary and Secondary Databases. Build CRUD Operation
 
 
-###API Enpoints
+### API Enpoints
 
 + DELETE `/:trailId/delete`
   - Given a trailId, deletes the trail information.
@@ -151,7 +151,7 @@ Draft Model for Trails:
   - Given a trailId, retrieves all trail information for that trail.
 
 
-###JSON Example
+### JSON Example
 
 Example JSON response to `http:localhost:3001/6784641/trailInfo` for a trail with an ID of 6784641:
 
