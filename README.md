@@ -8,8 +8,8 @@
 + [Backlog / Noted Opportunities](#Backlog-/-Noted-Opportunities)
 + [Phase 2: Implement and Scale Secondary Database](#Phase-2:-Implement-and-Scale-Secondary-Database)
 + [Phase 3: Optimize Primary and Secondary Databases. Build CRUD Operation](#Phase-3:-Optimize-Primary-and-Secondary-Databases.-Build-CRUD-Operation)
-+ [API Endpoints](API-Endpoints)
-+ [JSON Example](JSON-Example)
++ [API Endpoints](#API-Endpoints)
++ [JSON Example](#JSON-Example)
 
 ## Related Projects
 - [Trails (FEC)](https://github.com/rpt09-scully/trail-service)
