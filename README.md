@@ -9,7 +9,7 @@
 + [Phase 2: Implement and Scale Secondary Database](#Phase-2:-Implement-and-Scale-Secondary-Database)
 + [Phase 3: Optimize Primary and Secondary Databases. Build CRUD Operation](#Phase-3:-Optimize-Primary-and-Secondary-Databases.-Build-CRUD-Operation)
 + [API Endpoints](API-Endpoints)
-+ [JSON Example](JSON Example)
++ [JSON Example](JSON-Example)
 
 ## Related Projects
 - [Trails (FEC)](https://github.com/rpt09-scully/trail-service)
@@ -143,12 +143,15 @@ Draft Model for Trails:
 ##Phase 3: Optimize Primary and Secondary Databases. Build CRUD Operation
 
 
-####API Enpoints
+###API Enpoints
 
 + DELETE `/:trailId/delete`
   - Given a trailId, deletes the trail information.
 + GET `/:trailId/trailInfo`
   - Given a trailId, retrieves all trail information for that trail.
+
+
+###JSON Example
 
 Example JSON response to `http:localhost:3001/6784641/trailInfo` for a trail with an ID of 6784641:
 
