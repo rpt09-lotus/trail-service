@@ -13,10 +13,12 @@ export default class TrailDescription extends React.Component {
   }
 
   componentDidMount() {
-    let endpoint = (process.env.ENVIRONMENT === 'prod') ? `http://trail-env.8jhbbn2nrv.us-west-2.elasticbeanstalk.com/${this.state.activeTrail}/trailDescription` : `http://localhost:3001/${this.state.activeTrail}/trailDescription`;
+    let endpoint = (process.env.ENVIRONMENT === 'prod') ? `http://ec2-54-189-151-164.us-west-2.compute.amazonaws.com/${this.state.activeTrail}/trailDescription` : `http://localhost:3001/${this.state.activeTrail}/trailDescription`;
     this._asyncRequest = axios.get(endpoint)
       .then(response => {
+        console.log(response.data)
         this._asyncRequest = null;
+
         this.setState({ trailDesc: response.data });
       })
       .catch((error) => {
@@ -35,6 +37,7 @@ export default class TrailDescription extends React.Component {
       // Render loading state...
       return <div className="fetching"></div>;
     } else {
+
       const trailTags = this.state.trailDesc.tags.map((tag, i) => <span key={i}>{tag}</span>);
       return (
         <div className={`${style.trailDesc} row flex-row justify-content-left col-8`}>

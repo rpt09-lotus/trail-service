@@ -13,7 +13,7 @@ export default class Banner extends React.Component {
   }
 
   componentDidMount() {
-    let endpoint = (process.env.ENVIRONMENT === 'prod') ? `http://trail-env.8jhbbn2nrv.us-west-2.elasticbeanstalk.com/${this.state.activeTrail}/banner` : `http://localhost:3001/${this.state.activeTrail}/banner`;
+    let endpoint = (process.env.ENVIRONMENT === 'prod') ? `http://ec2-54-189-151-164.us-west-2.compute.amazonaws.com/${this.state.activeTrail}/banner` : `http://localhost:3001/${this.state.activeTrail}/banner`;
     this._asyncRequest = axios.get(endpoint)
       .then(response => {
         this._asyncRequest = null;

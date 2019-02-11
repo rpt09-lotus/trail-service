@@ -166,15 +166,15 @@ const tags = () => {
     'road biking'
   ];
 
-  let arr = [];
+  let str = '';
   let numOfTags = Math.floor(Math.random() * 8) + 5;
 
   for (let i = 0; i < numOfTags; i++) {
     let num = Math.floor(Math.random() * 20);
-    arr.push(trailTags[num]);
+    str += trailTags[num] + ',';
   }
 
-  return arr;
+  return str;
 };
 
 module.exports = {
@@ -189,3 +189,4 @@ module.exports = {
   setTrailName,
   tags
 };
+

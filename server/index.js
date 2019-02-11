@@ -22,7 +22,7 @@ app.set('views', path.resolve(__dirname + '/../public'));
 app.use(express.static(path.resolve(__dirname + '/../public')));
 
 // Pass bundle location for dev or prod
-const bundleSource = (port === 3001) ? 'http://localhost:3001/app.js' : 'http://trail-env.8jhbbn2nrv.us-west-2.elasticbeanstalk.com/app.js' ;
+const bundleSource = (port === 3001) ? 'http://localhost:3001/app.js' : 'http://ec2-54-202-83-16.us-west-2.compute.amazonaws.com/app.js' ;
 
 app.use('/:trailId', trailInfo);
 app.get('/:trailId(\\d+$)*?', (req, res) => {
@@ -30,7 +30,7 @@ app.get('/:trailId(\\d+$)*?', (req, res) => {
 });
 
 // Console log for dev or prod
-var serviceHost = (process.env.RDS_HOSTNAME) ? 'http://trail-env.8jhbbn2nrv.us-west-2.elasticbeanstalk.com' : `http://localhost:${port}`;
+var serviceHost = (process.env.RDS_HOSTNAME) ? 'http://ec2-54-202-83-16.us-west-2.compute.amazonaws.com.com' : `http://localhost:${port}`;
 app.listen(port, () => console.log(`trail-service widget listening on ${serviceHost}`));
 
 module.exports = app;

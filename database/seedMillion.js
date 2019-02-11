@@ -19,7 +19,8 @@ const main = (async () => {
         {id: 'route_type', title: 'route_type'},
         {id: 'difficulty', title: 'difficulty'},
         {id: 'general_area', title: 'general_area'},
-        {id: 'origin', title: 'origin'}
+        {id: 'origin', title: 'origin'},
+        {id: 'tags', title: 'tags'}
     ]
   });
 
@@ -27,7 +28,7 @@ const main = (async () => {
   csvWriter.writeRecords([])
 
   const records = [];
-  for (let i = 101; i < tenMillion + 1; i++) {
+  for (let i = 1; i < tenMillion + 1; i++) {
     if (records.length > 99 || i === tenMillion) {
       await csvWriter.writeRecords(records);
       records.length = 0;
@@ -43,7 +44,8 @@ const main = (async () => {
       route_type: seedFuncs.setRouteType(),
       difficulty: seedFuncs.setDifficulty(),
       general_area: seedFuncs.sentences(1, 3, 65),
-      origin: seedFuncs.setOrigin()
+      origin: seedFuncs.setOrigin(),
+      tags: seedFuncs.tags()
     });
   }
 

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router({mergeParams: true});
 const db = require('../database/index');
 const service = require('./serviceHelpers');
+const seedFunc = require('../generateSql.js')
 
 /*
   API endpoint for trail service
@@ -74,11 +75,9 @@ router.get('/trailDescription', (req, res) => {
       elevationGain: theTrail.elevation_gain,
       elevationUnits: theTrail.elevation_units,
       routeType: theTrail.route_type,
+      tags: theTrail.tags.split(',')
     };
-    db.getTags(theId, (tags) => {
-      resObj.tags = tags;
-      res.status(200).json(resObj);
-    });
+    res.status(200).json(resObj);
   });
 });
 
