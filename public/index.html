@@ -10,7 +10,7 @@
   <meta name="googlebot" content="noindex,nofollow"><!-- Google Specific -->
   <meta name="subject" content="Local hiking trail.">
   <link rel="canonical" href="http://localhost:3000/">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
   <link rel="stylesheet" href="./css/style.css">
@@ -22,9 +22,9 @@
       <div id='main' class="row justify-content-center">
 
         <div id="9Trails.TrailService.Banner" class="row flex-row justify-content-center col-12"></div>
-      
+
         <div><p></p></div>
-      
+
         <div id="9Trails.TrailService.TrailDescription" class="row flex-row justify-content-center col-12"></div>
 
       </div>
@@ -32,15 +32,15 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.5.2/umd/react.development.js" integrity="sha256-VitF3nhtwS4oxyddypEINBEyVS3xyk0Ngmk0daEnick=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.5.2/umd/react-dom.development.js" integrity="sha256-8wd2P2Yj4wkD78XfzxVjDjEFKYEWR3jgZKgNCGUW9rI=" crossorigin="anonymous"></script>
-  <script src="{{appSource}}"></script>
+  <script src="http://localhost:3001/app.js"></script>
 
   <script>
     ReactDOM.render(
-      React.createElement(window.NT.TrailService.Banner), 
+      React.createElement(window.NT.TrailService.Banner),
       document.getElementById('9Trails.TrailService.Banner')
     );
     ReactDOM.render(
-      React.createElement(window.NT.TrailService.TrailDescription), 
+      React.createElement(window.NT.TrailService.TrailDescription),
       document.getElementById('9Trails.TrailService.TrailDescription')
     );
   </script>
