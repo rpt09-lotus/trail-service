@@ -7,8 +7,8 @@ const morgan = require('morgan');
 const hbe = require('express-handlebars');
 const trailInfo = require('./trailInfo');
 
-const port = process.env.PORT || 3001;
-
+const port = 8080
+console.log(port, 'this is port')
 // log every request to the console
 // https://www.npmjs.com/package/morgan#dev
 app.use(morgan('dev'));
@@ -22,7 +22,7 @@ app.set('views', path.resolve(__dirname + '/../public'));
 app.use(express.static(path.resolve(__dirname + '/../public')));
 
 // Pass bundle location for dev or prod
-const bundleSource = (port === 3001) ? 'http://localhost:3001/app.js' : 'http://ec2-54-202-83-16.us-west-2.compute.amazonaws.com/app.js' ;
+const bundleSource = 'http://ec2-34-217-75-14.us-west-2.compute.amazonaws.com:8080/app.js';
 
 app.use('/:trailId', trailInfo);
 app.get('/:trailId(\\d+$)*?', (req, res) => {
@@ -30,7 +30,7 @@ app.get('/:trailId(\\d+$)*?', (req, res) => {
 });
 
 // Console log for dev or prod
-var serviceHost = (process.env.RDS_HOSTNAME) ? 'http://ec2-54-202-83-16.us-west-2.compute.amazonaws.com.com' : `http://localhost:${port}`;
+var serviceHost = 'http://ec2-34-217-75-14.us-west-2.compute.amazonaws.com:8080'
 app.listen(port, () => console.log(`trail-service widget listening on ${serviceHost}`));
 
 module.exports = app;

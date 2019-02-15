@@ -40,6 +40,7 @@ router.get('/trailInfo', (req, res) => {
 */
 router.get('/banner', (req, res) => {
   var theId = req.params.trailId;
+	console.log('AHHHHHHHHHHHH', theId)
   db.getTrail(theId, (row) => {
     var theTrail = row[0];
     // banner state only needs trailName and difficulty from trail-service

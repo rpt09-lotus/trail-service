@@ -6,14 +6,14 @@ var getBannerData = (id, callback) => {
   // Production (deployed) services:
   if (process.env.RDS_HOSTNAME) {
     var serviceHost = {
-      REVIEWS: 'http://reviewservice.jsxvmg3wq3.us-west-1.elasticbeanstalk.com',
-      PHOTOS: 'http://trail-photos-service-dev.us-west-1.elasticbeanstalk.com'
+	    REVIEWS: 'http://ec2-35-160-3-194.us-west-2.compute.amazonaws.com',
+      PHOTOS: 'http://ec2-54-183-106-59.us-west-1.compute.amazonaws.com'
     };
   } else {
     // Dev (local) services:
     var serviceHost = {
-      REVIEWS: 'http://localhost:3004',
-      PHOTOS: 'http://localhost:3003'
+      REVIEWS: 'http://ec2-35-160-3-194.us-west-2.compute.amazonaws.com',
+      PHOTOS: 'http://ec2-54-183-106-59.us-west-1.compute.amazonaws.com'
     };
   }
 
