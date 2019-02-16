@@ -14,7 +14,7 @@ export default class TrailDescription extends React.Component {
 
   componentDidMount() {
 	  console.log('hel')
-    let endpoint = `http://ec2-52-38-62-57.us-west-2.compute.amazonaws.com/${this.state.activeTrail}/trailDescription`
+    let endpoint = `http://ec2-52-11-10-220.us-west-2.compute.amazonaws.com/${this.state.activeTrail}/trailDescription`
     this._asyncRequest = axios.get(endpoint)
       .then(response => {
         console.log(response.data)
