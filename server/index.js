@@ -22,7 +22,7 @@ app.set('views', path.resolve(__dirname + '/../public'));
 app.use(express.static(path.resolve(__dirname + '/../public')));
 
 // Pass bundle location for dev or prod
-const bundleSource = 'http://ec2-34-217-12-230.us-west-2.compute.amazonaws.com/app.js';
+const bundleSource = 'http://ec2-52-38-62-57.us-west-2.compute.amazonaws.com/app.js';
 
 app.use('/:trailId', trailInfo);
 app.get('/:trailId(\\d+$)*?', (req, res) => {
@@ -30,7 +30,7 @@ app.get('/:trailId(\\d+$)*?', (req, res) => {
 });
 
 // Console log for dev or prod
-var serviceHost = 'http://ec2-34-217-12-230.us-west-2.compute.amazonaws.com'
+var serviceHost = 'http://ec2-52-38-62-57.us-west-2.compute.amazonaws.com'
 app.listen(port, () => console.log(`trail-service widget listening on ${serviceHost}`));
 
 module.exports = app;

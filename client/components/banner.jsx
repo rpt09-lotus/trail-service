@@ -13,7 +13,7 @@ export default class Banner extends React.Component {
   }
 
   componentDidMount() {
-    let endpoint = `http://ec2-34-217-12-230.us-west-2.compute.amazonaws.com/${this.state.activeTrail}/banner`
+    let endpoint = `http://ec2-52-38-62-57.us-west-2.compute.amazonaws.com/${this.state.activeTrail}/banner`
 	  console.log('ENDPOINT', endpoint)
     this._asyncRequest = axios.get(endpoint)
       .then(response => {
